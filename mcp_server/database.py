@@ -41,7 +41,7 @@ class ConversationRecord(Base):
     turn_id = Column(Integer, nullable=False)
     role = Column(String, nullable=False)
     content = Column(Text, nullable=False)
-    timestamp = Column(DateTime, default=datetime.utcnow, nullable=False)
+    timestamp = Column(DateTime, default=datetime.utcnow, nullable=False, index=True)
 
 
 class UserPreferencesRecord(Base):
@@ -72,7 +72,6 @@ def init_db() -> None:
         conn.execute(text("PRAGMA synchronous=NORMAL"))
         conn.execute(text("PRAGMA busy_timeout=5000"))
     Base.metadata.create_all(bind=engine)
-
 
 
 def write_conversation(db: Session, data: Dict[str, Any]) -> str:

@@ -58,14 +58,16 @@ git clone https://github.com/Rushikesh-5706/Persistent-Memory-AI-Academic-Adviso
 cd Persistent-Memory-AI-Academic-Advisor-with-an-MCP-Server-and-Vector-Search
 ```
 
-### 2. Configure environment variables
+### 2. Configure environment variables (Local agent use only)
+
+The MCP server is pre-configured via inline environment variables in `docker-compose.yml`
+and will run out-of-the-box with zero setup.
+
+If you plan to run the conversational agent locally, you can optionally configure `.env`:
 
 ```bash
 cp .env.example .env
 ```
-
-The default values in `.env` work out of the box. No changes required unless your
-Ollama is running on a non-standard host or port.
 
 ### 3. Start the MCP server
 

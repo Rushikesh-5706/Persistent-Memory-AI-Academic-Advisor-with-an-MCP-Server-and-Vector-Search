@@ -1,5 +1,5 @@
 import os
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 import chromadb
 from chromadb.config import Settings
@@ -13,8 +13,8 @@ EMBEDDING_MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "all-MiniLM-L6-v2")
 
 os.makedirs(CHROMA_DB_PATH, exist_ok=True)
 
-_embedding_model: SentenceTransformer = None
-_chroma_client: chromadb.PersistentClient = None
+_embedding_model: Optional[SentenceTransformer] = None
+_chroma_client: Optional[chromadb.PersistentClient] = None
 _collection = None
 
 
