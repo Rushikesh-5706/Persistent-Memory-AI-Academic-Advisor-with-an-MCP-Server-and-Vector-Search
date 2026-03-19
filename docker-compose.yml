@@ -9,12 +9,16 @@ services:
       - "8000:8000"
     volumes:
       - ./data:/app/data
-    env_file:
-      - .env
+    environment:
+      - DB_PATH=/app/data/advisor_memory.db
+      - CHROMA_DB_PATH=/app/data/chroma_db
+      - EMBEDDING_MODEL_NAME=all-MiniLM-L6-v2
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - OLLAMA_MODEL=llama3
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 10s
       timeout: 5s
       retries: 5
-      start_period: 30s
+      start_period: 120s
     restart: unless-stopped
