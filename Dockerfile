@@ -10,6 +10,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY mcp_server/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+ENV EMBEDDING_MODEL_NAME=all-MiniLM-L6-v2
+RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
+
 COPY mcp_server/ .
 
 RUN mkdir -p /app/data
