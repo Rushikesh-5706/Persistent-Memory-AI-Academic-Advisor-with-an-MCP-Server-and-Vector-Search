@@ -1,10 +1,8 @@
-import os
 from contextlib import asynccontextmanager
 from typing import Any, Dict, List
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, status
-from fastapi.responses import JSONResponse
 
 from database import (
     SessionLocal,
