@@ -96,8 +96,9 @@ def semantic_search(
             include=["documents", "metadatas", "distances"],
         )
     except Exception:
-        # n_results may exceed user-specific document count when multiple users exist.
-        # Retry with n_results=1 to guarantee at least the closest result is returned.
+        # When n_results exceeds the number of documents matching the user_id
+        # filter, ChromaDB raises a ValueError. Retry with n_results=1 to
+        # guarantee the closest result is returned.
         try:
             results = collection.query(
                 query_embeddings=[query_embedding],
