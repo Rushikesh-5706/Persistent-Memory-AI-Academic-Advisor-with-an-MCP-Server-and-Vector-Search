@@ -28,7 +28,7 @@ Data flow:
 5. The LLM generates a response.
 6. The agent calls `memory_write` to persist the new turn to both SQLite and ChromaDB.
 
-The architecture diagram is at `docs/memory_architecture.png`.
+![Memory System Architecture](docs/memory_architecture.png)
 
 ---
 
