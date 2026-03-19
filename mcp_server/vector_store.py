@@ -88,12 +88,25 @@ def semantic_search(
 
     effective_k = min(top_k, count)
 
-    results = collection.query(
-        query_embeddings=[query_embedding],
-        n_results=effective_k,
-        where={"user_id": user_id} if user_id else None,
-        include=["documents", "metadatas", "distances"],
-    )
+    try:
+        results = collection.query(
+            query_embeddings=[query_embedding],
+            n_results=effective_k,
+            where={"user_id": user_id} if user_id else None,
+            include=["documents", "metadatas", "distances"],
+        )
+    except Exception:
+        # n_results may exceed user-specific document count when multiple users exist.
+        # Retry with n_results=1 to guarantee at least the closest result is returned.
+        try:
+            results = collection.query(
+                query_embeddings=[query_embedding],
+                n_results=1,
+                where={"user_id": user_id} if user_id else None,
+                include=["documents", "metadatas", "distances"],
+            )
+        except Exception:
+            return []
 
     output = []
     if not results["ids"] or not results["ids"][0]:
