@@ -70,22 +70,12 @@ def init_db() -> None:
     with engine.connect() as conn:
         conn.execute(text("PRAGMA journal_mode=WAL"))
         conn.execute(text("PRAGMA synchronous=NORMAL"))
-        conn.execute(text(f"PRAGMA busy_timeout=5000"))
+        conn.execute(text("PRAGMA busy_timeout=5000"))
     Base.metadata.create_all(bind=engine)
 
 
-def get_db() -> Session:
-    db = SessionLocal()
-    try:
-        return db
-    except Exception:
-        db.close()
-        raise
-
 
 def write_conversation(db: Session, data: Dict[str, Any]) -> str:
-    from datetime import timezone
-
     timestamp = data.get("timestamp")
     if isinstance(timestamp, str):
         timestamp = datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
