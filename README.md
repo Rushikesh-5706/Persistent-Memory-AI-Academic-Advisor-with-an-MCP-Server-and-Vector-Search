@@ -58,12 +58,15 @@ git clone https://github.com/Rushikesh-5706/Persistent-Memory-AI-Academic-Adviso
 cd Persistent-Memory-AI-Academic-Advisor-with-an-MCP-Server-and-Vector-Search
 ```
 
-### 2. Configure environment variables (Local agent use only)
+### 2. Configure environment variables
 
-The MCP server is pre-configured via inline environment variables in `docker-compose.yml`
-and will run out-of-the-box with zero setup.
+Environment variables are set inline in `docker-compose.yml` and work out of the
+box with no changes required. The `.env.example` file documents all available
+variables for reference.
 
-If you plan to run the conversational agent locally, you can optionally configure `.env`:
+If you want to override any value, open `docker-compose.yml` and edit the
+`environment:` block under the `mcp_server` service. For the agent, copy the
+example file and edit it:
 
 ```bash
 cp .env.example .env
