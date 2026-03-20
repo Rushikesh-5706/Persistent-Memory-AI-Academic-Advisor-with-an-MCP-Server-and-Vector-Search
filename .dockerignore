@@ -3,3 +3,8 @@ data/
 .git/
 docs/
 agent/
+__pycache__/
+*.pyc
+*.pyo
+*.db
+*.sqlite3
